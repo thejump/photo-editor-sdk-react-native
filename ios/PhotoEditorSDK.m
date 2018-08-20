@@ -175,6 +175,123 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     }];
     
     
+    
+    
+    
+    
+    
+     NSMutableArray<PESDKStickerCategory *> *categories = [[PESDKStickerCategory all] mutableCopy];
+    
+    NSString* url=@"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/";
+    
+    NSMutableArray* badgeURLs = [[NSMutableArray alloc] init];
+    for (int i = 14; i <=16; i++)
+    {
+        [badgeURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 19; i <=29; i++)
+    {
+        [badgeURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 31; i <=31; i++)
+    {
+        [badgeURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+   
+
+   
+    
+    NSMutableArray<PESDKSticker *> *badges = [[NSMutableArray alloc] init];
+    for (NSURL *stickerURL in badgeURLs) {
+        [badges addObject:[[PESDKSticker alloc] initWithImageURL:stickerURL thumbnailURL:nil identifier:stickerURL.path]];
+    }
+    [categories addObject:[[PESDKStickerCategory alloc] initWithTitle:@"Badges" imageURL:[NSURL URLWithString: @"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/categories/badges.png"] stickers:badges]];
+    
+    
+    NSMutableArray* borderURLs = [[NSMutableArray alloc] init];
+    for (int i = 1; i <=5; i++)
+    {
+        [borderURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 8; i <=10; i++)
+    {
+        [borderURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 17; i <=18; i++)
+    {
+        [borderURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 32; i <=42; i++)
+    {
+        [borderURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    NSMutableArray<PESDKSticker *> *borders = [[NSMutableArray alloc] init];
+    for (NSURL *stickerURL in borderURLs) {
+        [borders addObject:[[PESDKSticker alloc] initWithImageURL:stickerURL thumbnailURL:nil identifier:stickerURL.path]];
+    }
+    [categories addObject:[[PESDKStickerCategory alloc] initWithTitle:@"Borders" imageURL:[NSURL URLWithString: @"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/categories/borders.png"] stickers:borders]];
+    
+    NSMutableArray* swashURLs = [[NSMutableArray alloc] init];
+    for (int i = 6; i <=7; i++)
+    {
+        [swashURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 43; i <=70; i++)
+    {
+        [swashURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+   
+    NSMutableArray<PESDKSticker *> *swashes = [[NSMutableArray alloc] init];
+    for (NSURL *stickerURL in swashURLs) {
+        [swashes addObject:[[PESDKSticker alloc] initWithImageURL:stickerURL thumbnailURL:nil identifier:stickerURL.path]];
+    }
+    [categories addObject:[[PESDKStickerCategory alloc] initWithTitle:@"Swashes" imageURL:[NSURL URLWithString: @"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/categories/swashes.png"] stickers:swashes]];
+    
+    
+    NSMutableArray* wordURLs = [[NSMutableArray alloc] init];
+    for (int i = 11; i <=13; i++)
+    {
+        [wordURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"frame_", @(i),@".png"]]];
+    }
+    for (int i = 1; i <=35; i++)
+    {
+        [wordURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"text_", @(i),@".png"]]];
+    }
+    for (int i = 151; i <=185; i++)
+    {
+        [wordURLs addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"object_", @(i),@".png"]]];
+    }
+    
+    NSMutableArray<PESDKSticker *> *words = [[NSMutableArray alloc] init];
+    for (NSURL *stickerURL in wordURLs) {
+        [words addObject:[[PESDKSticker alloc] initWithImageURL:stickerURL thumbnailURL:nil identifier:stickerURL.path]];
+    }
+    [categories addObject:[[PESDKStickerCategory alloc] initWithTitle:@"Words" imageURL:[NSURL URLWithString: @"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/categories/words.png"] stickers:words]];
+    
+    
+    NSMutableArray* objectURls = [[NSMutableArray alloc] init];
+    for (int i = 1; i <=150; i++)
+    {
+        [objectURls addObject:  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", url, @"object_", @(i),@".png"]]];
+    }
+  
+    NSMutableArray<PESDKSticker *> *objects = [[NSMutableArray alloc] init];
+    for (NSURL *stickerURL in objectURls) {
+        [objects addObject:[[PESDKSticker alloc] initWithImageURL:stickerURL thumbnailURL:nil identifier:stickerURL.path]];
+    }
+    [categories addObject:[[PESDKStickerCategory alloc] initWithTitle:@"Objects" imageURL:[NSURL URLWithString: @"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/categories/outdoor.png"] stickers:objects]];
+    
+    PESDKStickerCategory.all = [categories copy];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     self.editController = [[PESDKPhotoEditViewController alloc] initWithPhoto:image configuration:config menuItems:menuItems photoEditModel:photoEditModel];
     
     self.editController.delegate = self;
@@ -187,6 +304,11 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
 
 -(PESDKConfiguration*)_buildConfig: (NSDictionary *)options {
     PESDKConfiguration* config = [[PESDKConfiguration alloc] initWithBuilder:^(PESDKConfigurationBuilder * builder) {
+      
+        [builder configureStickerToolController:^(PESDKStickerToolControllerOptionsBuilder * b) {
+            b.stickerPreviewSize =CGSizeMake(80, 80);
+        }];
+        
         [builder configurePhotoEditorViewController:^(PESDKPhotoEditViewControllerOptionsBuilder * b) {
             if ([options valueForKey:kBackgroundColorEditorKey]) {
                 b.backgroundColor = [AVHexColor colorWithHexString: [options valueForKey:kBackgroundColorEditorKey]];
@@ -200,7 +322,8 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
                 b.forceCropMode = [[options valueForKey:kForceCrop] boolValue];
 
             }
-         
+        
+        
              if ([options valueForKey:kEditorCaption]) {
                  b.titleViewConfigurationClosure = ^(UIView * _Nonnull view) {
                       UILabel* label =view;
@@ -210,7 +333,6 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
                 
                 }
           
-    
             
         }];
         
