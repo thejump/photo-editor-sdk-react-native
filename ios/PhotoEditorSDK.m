@@ -17,6 +17,8 @@ NSString* const kBackgroundColorCameraKey = @"backgroundColorCamera";
 NSString* const kCameraRollAllowedKey = @"cameraRowAllowed";
 NSString* const kShowFiltersInCameraKey = @"showFiltersInCamera";
 NSString* const kForceCrop = @"forceCrop";
+NSString* const kEditorCaption = @"editorCaption";
+
 
 // Menu items
 typedef enum {
@@ -72,6 +74,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
              @"cameraRollAllowedKey":           kCameraRollAllowedKey,
              @"showFiltersInCameraKey":         kShowFiltersInCameraKey,
              @"forceCrop":                      kForceCrop,
+        @"editorCaption":                      kEditorCaption,
              @"transformTool":                  [NSNumber numberWithInt: transformTool],
              @"filterTool":                     [NSNumber numberWithInt: filterTool],
              @"focusTool":                      [NSNumber numberWithInt: focusTool],
@@ -197,6 +200,15 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
                 b.forceCropMode = [[options valueForKey:kForceCrop] boolValue];
 
             }
+         
+             if ([options valueForKey:kEditorCaption]) {
+               options.titleViewConfigurationClosure = { titleView in
+        if let titleLabel = titleView as? UILabel {
+          titleLabel.text = [options valueForKey:kEditorCaption]
+        }
+      }
+            }
+    
             
         }];
         
