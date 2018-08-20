@@ -202,12 +202,14 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
             }
          
              if ([options valueForKey:kEditorCaption]) {
-               options.titleViewConfigurationClosure = { titleView in
-        if let titleLabel = titleView as? UILabel {
-          titleLabel.text = [options valueForKey:kEditorCaption]
-        }
-      }
-            }
+                 b.titleViewConfigurationClosure = ^(UIView * _Nonnull view) {
+                      UILabel* label =view;
+                     label.text = [options valueForKey:kEditorCaption];
+                     
+                 };
+                
+                }
+          
     
             
         }];
