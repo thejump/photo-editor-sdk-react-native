@@ -369,7 +369,12 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
   
     PESDKFontImporter.all=fonts;
     
-    
+    [PESDK setBundleImageBlock:^UIImage * _Nullable(NSString * _Nonnull imageName) {
+         if ([imageName isEqualToString:@"imgly_icon_save"]) {
+            return [UIImage imageNamed:@"check44"];
+        }
+        return nil;
+    }];
     
     
     
@@ -465,6 +470,8 @@ RCT_EXPORT_METHOD(openEditor: (NSString*)path options: (NSArray *)features optio
 }
 
 RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) options resolve: (RCTPromiseResolveBlock)resolve reject: (RCTPromiseRejectBlock)reject) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
     __weak typeof(self) weakSelf = self;
     UIViewController *currentViewController = RCTPresentedViewController();
     PESDKConfiguration* config = [self _buildConfig:options];
@@ -483,12 +490,13 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
     }];
     
     [currentViewController presentViewController:self.cameraController animated:YES completion:nil];
+      });
 }
 
 -(void)photoEditViewControllerDidCancel:(PESDKPhotoEditViewController *)photoEditViewController {
-    if (self.rejecter != nil) {
+    if (self.resolver != nil) {
 //        self.rejecter(@"DID_CANCEL", @"User did cancel the editor", nil);
-        self.rejecter = nil;
+        self.resolver(nil);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
         });
