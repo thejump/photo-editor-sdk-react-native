@@ -443,7 +443,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
         [builder configureTransformToolController:^(PESDKTransformToolControllerOptionsBuilder * _Nonnull options) {
             options.allowFreeCrop = NO;
             options.allowedCropRatios = @[
-                                          [[PESDKCropAspect alloc] initWithWidth:1536 height:2730 localizedName:@"Story" rotatable:NO]
+                                          [[PESDKCropAspect alloc] initWithWidth:1536 height:2730 localizedName:@"Crop" rotatable:NO]
                                             ];
         }];
 
