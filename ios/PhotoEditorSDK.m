@@ -18,7 +18,7 @@ NSString* const kCameraRollAllowedKey = @"cameraRowAllowed";
 NSString* const kShowFiltersInCameraKey = @"showFiltersInCamera";
 NSString* const kForceCrop = @"forceCrop";
 NSString* const kEditorCaption = @"editorCaption";
-
+NSInteger*loaded=0;
 
 // Menu items
 typedef enum {
@@ -106,8 +106,8 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
           [NSNumber numberWithInt: filterTool],
           [NSNumber numberWithInt: focusTool],
           [NSNumber numberWithInt: adjustTool],
-          [NSNumber numberWithInt: textTool],
           [NSNumber numberWithInt: textDesignTool],
+          [NSNumber numberWithInt: textTool],
           [NSNumber numberWithInt: stickerTool],
           [NSNumber numberWithInt: overlayTool],
           [NSNumber numberWithInt: brushTool],
@@ -149,9 +149,9 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
                 break;
             }
             case textDesignTool: {
-             //   PESDKToolMenuItem* menuItem = [PESDKToolMenuItem createTextDesignToolItem];
-              //  PESDKPhotoEditMenuItem* editMenuItem = [[PESDKPhotoEditMenuItem alloc] initWithToolMenuItem:menuItem];
-              //  [menuItems addObject: editMenuItem];
+                PESDKToolMenuItem* menuItem = [PESDKToolMenuItem createTextDesignToolItem];
+                PESDKPhotoEditMenuItem* editMenuItem = [[PESDKPhotoEditMenuItem alloc] initWithToolMenuItem:menuItem];
+                [menuItems addObject: editMenuItem];
                 break;
             }
             case stickerTool: {
@@ -191,6 +191,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
      NSMutableArray<PESDKStickerCategory *> *categories = [[PESDKStickerCategory all] mutableCopy];
     
+    if([categories count]<5){
     NSString* url=@"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/";
     
     NSMutableArray* badgeURLs = [[NSMutableArray alloc] init];
@@ -289,7 +290,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
         [objects addObject:[[PESDKSticker alloc] initWithImageURL:stickerURL thumbnailURL:nil identifier:stickerURL.path]];
     }
     [categories addObject:[[PESDKStickerCategory alloc] initWithTitle:@"Objects" imageURL:[NSURL URLWithString: @"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/categories/outdoor.png"] stickers:objects]];
-    
+    }
     PESDKStickerCategory.all = [categories copy];
     
     
@@ -369,15 +370,15 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
   
     PESDKFontImporter.all=fonts;
     
+   
+        
+    
     [PESDK setBundleImageBlock:^UIImage * _Nullable(NSString * _Nonnull imageName) {
-         if ([imageName isEqualToString:@"imgly_icon_save"]) {
+        if ([imageName isEqualToString:@"imgly_icon_save"]) {
             return [UIImage imageNamed:@"check44"];
         }
         return nil;
     }];
-    
-    
-    
     
     
     self.editController = [[PESDKPhotoEditViewController alloc] initWithPhoto:image configuration:config menuItems:menuItems photoEditModel:photoEditModel];
@@ -442,7 +443,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
 
             
             // TODO: Video recording not supported currently
-            b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];
+            b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];//,[NSNumber numberWithInteger:RecordingModeVideo]];
         }];
 
         [builder configureTransformToolController:^(PESDKTransformToolControllerOptionsBuilder * _Nonnull options) {
@@ -484,18 +485,32 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
     
     [self.cameraController.view addGestureRecognizer:swipeDownRecognizer];
     [self.cameraController setCompletionBlock:^(UIImage * image, NSURL * _) {
-        [currentViewController dismissViewControllerAnimated:YES completion:^{
+       // if(image){
+            [currentViewController dismissViewControllerAnimated:YES completion:^{
+          
             [weakSelf _openEditor:image config:config features:features resolve:resolve reject:reject];
+           
         }];
+    /*    }
+        else{
+            [weakSelf saveVideo:_.absoluteString resolve:resolve];
+        }*/
     }];
     
     [currentViewController presentViewController:self.cameraController animated:YES completion:nil];
       });
 }
 
+-(void)saveVideo:(NSString *)path resolve: (RCTPromiseResolveBlock)resolve{
+    resolve(@{@"path":path,@"video":@true});
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.cameraController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    });
+}
+
 -(void)photoEditViewControllerDidCancel:(PESDKPhotoEditViewController *)photoEditViewController {
     if (self.resolver != nil) {
-//        self.rejecter(@"DID_CANCEL", @"User did cancel the editor", nil);
+        //        self.rejecter(@"DID_CANCEL", @"User did cancel the editor", nil);
         self.resolver(nil);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
@@ -523,7 +538,7 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
                       [randomPath stringByAppendingString:@".jpg"] ];
     
     [data writeToFile:path atomically:YES];
-    self.resolver(path);
+     self.resolver(@{@"path":path,@"video":@false});
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
     });
