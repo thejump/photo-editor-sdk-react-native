@@ -130,63 +130,23 @@ public class PESDKModule extends ReactContextBaseJavaModule {
 
         PESDKConfig config = settingsList.getConfig();
 
+UiConfigMainMenu uiConfigMainMenu = settingsList.getSettingsModel(UiConfigMainMenu.class);
+// Set the tools you want keep sure you licence is cover the feature and do not forget to include the correct modules in your build.gradle
+uiConfigMainMenu.setToolList(
+  new ToolItem("imgly_tool_transform", R.string.pesdk_transform_title_name, ImageSource.create(R.drawable.imgly_icon_tool_transform)),
+  new ToolItem("imgly_tool_filter", R.string.pesdk_filter_title_name, ImageSource.create(R.drawable.imgly_icon_tool_filters)),
+  new ToolItem("imgly_tool_adjustment", R.string.pesdk_adjustments_title_name, ImageSource.create(R.drawable.imgly_icon_tool_adjust)),
+  new ToolItem("imgly_tool_sticker_selection", R.string.pesdk_sticker_title_name, ImageSource.create(R.drawable.imgly_icon_tool_sticker)),
+  new ToolItem("imgly_tool_text_design", R.string.pesdk_textDesign_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text_design)),
+  new ToolItem("imgly_tool_text", R.string.pesdk_text_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text)),
+  new ToolItem("imgly_tool_overlay", R.string.pesdk_overlay_title_name, ImageSource.create(R.drawable.imgly_icon_tool_overlay)),
+  new ToolItem("imgly_tool_frame", R.string.pesdk_frame_title_name, ImageSource.create(R.drawable.imgly_icon_tool_frame)),
+  new ToolItem("imgly_tool_brush", R.string.pesdk_brush_title_name, ImageSource.create(R.drawable.imgly_icon_tool_brush)),
+  new ToolItem("imgly_tool_focus", R.string.pesdk_focus_title_name, ImageSource.create(R.drawable.imgly_icon_tool_focus))
+);
 
 
-        ArrayList<ToolConfigInterface> tools = new ArrayList<>();
-        ArrayList featureList;
-
-        if (features == null || features.size() == 0) {
-            featureList = new ArrayList();
-            featureList.add(transformTool);
-            featureList.add(filterTool);
-            featureList.add(focusTool);
-            featureList.add(adjustTool);
-            featureList.add(textTool);
-            featureList.add(stickerTool);
-            featureList.add(overlayTool);
-            featureList.add(brushTool);
-            featureList.add(magic);
-        } else {
-            featureList = features.toArrayList();
-        }
-
-
-
-        for (Object f: featureList) {
-            String feature = f.toString();
-            switch (feature) {
-                case transformTool:
-                    tools.add(new TransformEditorTool(R.string.imgly_tool_name_crop, R.drawable.imgly_icon_tool_transform));
-                    break;
-                case filterTool:
-                    tools.add(new FilterEditorTool(R.string.imgly_tool_name_filter, R.drawable.imgly_icon_tool_filters));
-                    break;
-                case focusTool:
-                    tools.add(new FocusEditorTool(R.string.imgly_tool_name_focus, R.drawable.imgly_icon_tool_focus));
-                    break;
-                case adjustTool:
-                    tools.add(new ColorAdjustmentTool(R.string.imgly_tool_name_adjust, R.drawable.imgly_icon_tool_adjust));
-                    break;
-                case textTool:
-                    tools.add(new TextEditorTool(R.string.imgly_tool_name_text, R.drawable.imgly_icon_tool_text));
-                    break;
-                case stickerTool:
-                    tools.add(new StickerEditorTool(R.string.imgly_tool_name_sticker, R.drawable.imgly_icon_tool_sticker));
-                    break;
-                case overlayTool:
-                    tools.add(new OverlayEditorTool(R.string.imgly_tool_name_overlay, R.drawable.imgly_icon_tool_overlay));
-                    break;
-                case brushTool:
-                    tools.add(new BrushEditorTool(R.string.imgly_tool_name_brush, R.drawable.imgly_icon_tool_brush));
-                    break;
-                case magic:
-                    // No magic tool on android
-                    break;
-            }
-        }
-
-        config.setTools(tools);
-
+      
         return settingsList;
     }
 
