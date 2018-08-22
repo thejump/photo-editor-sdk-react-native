@@ -27,30 +27,30 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableType;
 
+import ly.img.android.pesdk.assets.filter.basic.FilterPackBasic;
+import ly.img.android.pesdk.assets.font.basic.FontPackBasic;
+import ly.img.android.pesdk.assets.frame.basic.FramePackBasic;
+import ly.img.android.pesdk.assets.overlay.basic.OverlayPackBasic;
+import ly.img.android.pesdk.assets.sticker.emoticons.StickerPackEmoticons;
+import ly.img.android.pesdk.assets.sticker.shapes.StickerPackShapes;
+import ly.img.android.pesdk.backend.model.constant.Directory;
+import ly.img.android.pesdk.backend.model.state.CameraSettings;
+import ly.img.android.pesdk.backend.model.state.EditorLoadSettings;
+import ly.img.android.pesdk.backend.model.state.EditorSaveSettings;
+import ly.img.android.pesdk.backend.model.state.manager.SettingsList;
+import ly.img.android.pesdk.ui.activity.CameraPreviewBuilder;
+import ly.img.android.pesdk.ui.activity.ImgLyIntent;
+import ly.img.android.pesdk.ui.activity.PhotoEditorBuilder;
+import ly.img.android.pesdk.ui.model.state.*;
+import ly.img.android.pesdk.ui.utils.PermissionRequest;
+import ly.img.android.serializer._3._0._0.PESDKFileWriter;
+import ly.img.android.pesdk.ui.panels.item.ToolItem;
+import ly.img.android.pesdk.backend.decoder.ImageSource;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import ly.img.android.sdk.models.config.Divider;
-import ly.img.android.sdk.models.config.interfaces.ToolConfigInterface;
-import ly.img.android.sdk.models.constant.Directory;
-import ly.img.android.sdk.models.state.CameraSettings;
-import ly.img.android.sdk.models.state.EditorLoadSettings;
-import ly.img.android.sdk.models.state.EditorMenuState;
-import ly.img.android.sdk.models.state.EditorSaveSettings;
-import ly.img.android.sdk.models.state.PESDKConfig;
-import ly.img.android.sdk.models.state.manager.SettingsList;
-import ly.img.android.sdk.tools.BrushEditorTool;
-import ly.img.android.sdk.tools.ColorAdjustmentTool;
-import ly.img.android.sdk.tools.FilterEditorTool;
-import ly.img.android.sdk.tools.FocusEditorTool;
-import ly.img.android.sdk.tools.OverlayEditorTool;
-import ly.img.android.sdk.tools.StickerEditorTool;
-import ly.img.android.sdk.tools.TextEditorTool;
-import ly.img.android.sdk.tools.TransformEditorTool;
-import ly.img.android.ui.activities.CameraPreviewBuilder;
-import ly.img.android.ui.activities.ImgLyIntent;
-import ly.img.android.ui.activities.PhotoEditorBuilder;
 
 public class PESDKModule extends ReactContextBaseJavaModule {
 
@@ -128,7 +128,6 @@ public class PESDKModule extends ReactContextBaseJavaModule {
 
                 // TODO: Config options in PESDK v5 are limited compared to iOS (or I didn't find them)
 
-        PESDKConfig config = settingsList.getConfig();
 
 UiConfigMainMenu uiConfigMainMenu = settingsList.getSettingsModel(UiConfigMainMenu.class);
 // Set the tools you want keep sure you licence is cover the feature and do not forget to include the correct modules in your build.gradle
@@ -146,7 +145,7 @@ uiConfigMainMenu.setToolList(
 );
 
 
-      
+
         return settingsList;
     }
 
