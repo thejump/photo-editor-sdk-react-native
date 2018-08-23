@@ -308,7 +308,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Arizonia" fontName:@"Arizonia-Regular" identifier:@"Arizonia"]];
     [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Avenir Demi" fontName:@"AvenirNext-DemiBold" identifier:@"Avenir Demi"]];
     [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Avenir Med" fontName:@"AvenirNext-Medium" identifier:@"Avenir Med"]];
-    [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Avenir B" fontName:@"AvenirNext-Bold" identifier:@"Avenir Bold"]];
+    [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Avenir Bold" fontName:@"AvenirNext-Bold" identifier:@"Avenir Bold"]];
     [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Avenir Italic" fontName:@"AvenirNext-Italic" identifier:@"Avenir Italic"]];
     [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Bebas" fontName:@"Bebas" identifier:@"Bebas"]];
     [fonts addObject:[[PESDKFont alloc] initWithDisplayName:@"Belligerent" fontName:@"BelligerentMadness" identifier:@"Belligerent"]];
