@@ -46,6 +46,9 @@ import ly.img.android.pesdk.ui.utils.PermissionRequest;
 import ly.img.android.serializer._3._0._0.PESDKFileWriter;
 import ly.img.android.pesdk.ui.panels.item.ToolItem;
 import ly.img.android.pesdk.backend.decoder.ImageSource;
+import ly.img.android.pesdk.backend.model.state.AssetConfig;
+import ly.img.android.pesdk.backend.model.config.CropAspectAsset;
+import ly.img.android.pesdk.ui.panels.item.CropAspectItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,16 +116,16 @@ public class PESDKModule extends ReactContextBaseJavaModule {
     // Config builder
     private SettingsList buildConfig(ReadableMap options, @Nullable ReadableArray features, @Nullable String imagePath) {
         SettingsList settingsList = new SettingsList();
-        settingsList
-                .getSettingsModel(EditorLoadSettings.class)
-                .setImageSourcePath(imagePath)
-                .getSettingsModel(EditorSaveSettings.class)
-                // TODO: Make export directory configurable
+
+        settingsList.getSettingsModel(CameraSettings.class)
                 .setExportDir(Directory.DCIM, "PESDK")
-                .setExportPrefix("PESDK_")
-                .setSavePolicy(
-                        EditorSaveSettings.SavePolicy.RETURN_ALWAYS_ONLY_OUTPUT
-                );
+                .setExportPrefix("camera_");
+
+        // Set custom editor image export settings
+        settingsList.getSettingsModel(EditorSaveSettings.class)
+                .setExportDir(Directory.DCIM, "PESDK")
+                .setExportPrefix("result_")
+                .setSavePolicy(EditorSaveSettings.SavePolicy.RETURN_ALWAYS_ONLY_OUTPUT);
 
 
 
@@ -132,7 +135,6 @@ public class PESDKModule extends ReactContextBaseJavaModule {
 UiConfigMainMenu uiConfigMainMenu = settingsList.getSettingsModel(UiConfigMainMenu.class);
 // Set the tools you want keep sure you licence is cover the feature and do not forget to include the correct modules in your build.gradle
 uiConfigMainMenu.setToolList(
-  new ToolItem("imgly_tool_transform", R.string.pesdk_transform_title_name, ImageSource.create(R.drawable.imgly_icon_tool_transform)),
   new ToolItem("imgly_tool_filter", R.string.pesdk_filter_title_name, ImageSource.create(R.drawable.imgly_icon_tool_filters)),
   new ToolItem("imgly_tool_adjustment", R.string.pesdk_adjustments_title_name, ImageSource.create(R.drawable.imgly_icon_tool_adjust)),
   new ToolItem("imgly_tool_sticker_selection", R.string.pesdk_sticker_title_name, ImageSource.create(R.drawable.imgly_icon_tool_sticker)),
@@ -144,6 +146,16 @@ uiConfigMainMenu.setToolList(
   new ToolItem("imgly_tool_focus", R.string.pesdk_focus_title_name, ImageSource.create(R.drawable.imgly_icon_tool_focus))
 );
 
+// Remove default Assets and add your own aspects
+        settingsList.getSettingsModel(AssetConfig.class).getAssetMap(CropAspectAsset.class).clear()
+                .add(
+                new CropAspectAsset("Crop", 1536, 2730, false)
+        );
+
+// Add your own Asset to UI config and select the Force crop Mode.
+        settingsList.getSettingsModel(UiConfigAspect.class).setAspectList(
+                new CropAspectItem("Crop","Crop")
+        );
 
 
         return settingsList;
