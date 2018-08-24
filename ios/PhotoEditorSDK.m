@@ -43,7 +43,11 @@ typedef enum {
 @property (strong, nonatomic) PESDKTransformToolControllerOptions* transFormController;
 
 
+
+
 @end
+
+
 
 @implementation PhotoEditorSDK
 RCT_EXPORT_MODULE(PESDK);
@@ -95,6 +99,9 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
     // Just an empty model
     PESDKPhotoEditModel* photoEditModel = [[PESDKPhotoEditModel alloc] init];
+    
+    PESDK.analytics.isEnabled = YES;
+    [PESDK.analytics addAnalyticsClient:[PESDKAnalyticsClient new]];
     
     // Build the menu items from the features array if present
     NSMutableArray<PESDKPhotoEditMenuItem *>* menuItems = [[NSMutableArray alloc] init];
@@ -372,6 +379,8 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
     
     self.editController = [[PESDKPhotoEditViewController alloc] initWithPhoto:image configuration:config menuItems:menuItems photoEditModel:photoEditModel];
+    
+    self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
     
     self.editController.delegate = self;
     UIViewController *currentViewController = RCTPresentedViewController();
