@@ -528,7 +528,7 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
                       [randomPath stringByAppendingString:@".jpg"] ];
     
     [data writeToFile:path atomically:YES];
-     self.resolver(@{@"path":path,@"video":@false});
+     self.resolver(path);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
     });
