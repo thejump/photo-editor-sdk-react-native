@@ -34,6 +34,8 @@ typedef enum {
     textDesignTool,
 } FeatureType;
 
+
+
 @interface PhotoEditorSDK ()
 
 @property (strong, nonatomic) RCTPromiseResolveBlock resolver;
@@ -41,6 +43,7 @@ typedef enum {
 @property (strong, nonatomic) PESDKPhotoEditViewController* editController;
 @property (strong, nonatomic) PESDKCameraViewController* cameraController;
 @property (strong, nonatomic) PESDKTransformToolControllerOptions* transFormController;
+@property (strong, nonatomic) PESDKPhotoEditToolController* toolController;
 
 
 
@@ -100,8 +103,6 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     // Just an empty model
     PESDKPhotoEditModel* photoEditModel = [[PESDKPhotoEditModel alloc] init];
     
-    PESDK.analytics.isEnabled = YES;
-    [PESDK.analytics addAnalyticsClient:[PESDKAnalyticsClient new]];
     
     // Build the menu items from the features array if present
     NSMutableArray<PESDKPhotoEditMenuItem *>* menuItems = [[NSMutableArray alloc] init];
@@ -380,7 +381,8 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
     self.editController = [[PESDKPhotoEditViewController alloc] initWithPhoto:image configuration:config menuItems:menuItems photoEditModel:photoEditModel];
     
-    self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
+   // self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
+    
     
     self.editController.delegate = self;
     UIViewController *currentViewController = RCTPresentedViewController();
@@ -543,5 +545,27 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
     });
     
 }
+
+-(void)photoEditViewController:(PESDKPhotoEditViewController *)photoEditViewController didDismissToolController:(PESDKPhotoEditToolController * _Nonnull)toolController{
+  
+    self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
+    
+}
+
+-(void)photoEditViewController:(PESDKPhotoEditViewController *)photoEditViewController willPresentToolController:(PESDKPhotoEditToolController * _Nonnull)toolController{
+    self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0];
+    
+}
+
+/*
+-(void)photoEditViewController:(PESDKPhotoEditToolController *)photoEditToolController toolController {
+    if (self.resolver != nil) {
+        //        self.rejecter(@"DID_CANCEL", @"User did cancel the editor", nil);
+        self.resolver(nil);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+        });
+    }
+}*/
 
 @end
