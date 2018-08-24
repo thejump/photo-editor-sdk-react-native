@@ -49,6 +49,14 @@ import ly.img.android.pesdk.backend.decoder.ImageSource;
 import ly.img.android.pesdk.backend.model.state.AssetConfig;
 import ly.img.android.pesdk.backend.model.config.CropAspectAsset;
 import ly.img.android.pesdk.ui.panels.item.CropAspectItem;
+import ly.img.android.pesdk.backend.model.config.FontAsset;
+import ly.img.android.pesdk.linker.ConfigMap;
+import ly.img.android.pesdk.ui.utils.DataSourceIdItemList;
+import ly.img.android.pesdk.ui.panels.item.FontItem;
+import ly.img.android.pesdk.backend.model.config.ImageStickerAsset;
+import ly.img.android.pesdk.ui.panels.item.StickerCategoryItem;
+import ly.img.android.pesdk.ui.panels.item.ImageStickerItem;
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -156,6 +164,363 @@ uiConfigMainMenu.setToolList(
         settingsList.getSettingsModel(UiConfigAspect.class).setAspectList(
                 new CropAspectItem("Crop","Crop")
         );
+
+
+        final String fontAssetsFolder = "fonts/";
+
+        ConfigMap<FontAsset> fontAssetMap = settingsList.getSettingsModel(AssetConfig.class).getAssetMap(FontAsset.class);
+        fontAssetMap.add(new FontAsset("AvenirNext-Regular", fontAssetsFolder + "AvenirNext-Regular.ttf"));
+        fontAssetMap.add(new FontAsset("AceofSpades-Regular", fontAssetsFolder + "AceofSpades-Regular.otf"));
+        fontAssetMap.add(new FontAsset("Aerokids", fontAssetsFolder + "Aerokids.ttf"));
+        fontAssetMap.add(new FontAsset("AlphaEcho", fontAssetsFolder + "AlphaEcho.ttf"));
+        fontAssetMap.add(new FontAsset("Antonio-Bold", fontAssetsFolder + "Antonio-Bold.ttf"));
+        fontAssetMap.add(new FontAsset("AnuDawItalic", fontAssetsFolder + "AnuDawItalic.ttf"));
+        fontAssetMap.add(new FontAsset("ArbourOblique-Regular", fontAssetsFolder + "ArbourOblique-Regular.ttf"));
+        fontAssetMap.add(new FontAsset("Arcon-Rounded-Regular", fontAssetsFolder + "Arcon-Rounded-Regular.otf"));
+        fontAssetMap.add(new FontAsset("Arizonia-Regular", fontAssetsFolder + "Arizonia-Regular.ttf"));
+        fontAssetMap.add(new FontAsset("AvenirNext-DemiBold", fontAssetsFolder + "AvenirNext-DemiBold.ttf"));
+        fontAssetMap.add(new FontAsset("AvenirNext-Medium", fontAssetsFolder + "AvenirNext-Medium.ttf"));
+        fontAssetMap.add(new FontAsset("AvenirNext-Bold", fontAssetsFolder + "AvenirNext-Bold.ttf"));
+        fontAssetMap.add(new FontAsset("AvenirNext-Italic", fontAssetsFolder + "AvenirNext-Italic.ttf"));
+        fontAssetMap.add(new FontAsset("Bebas", fontAssetsFolder + "Bebas.ttf"));
+        fontAssetMap.add(new FontAsset("BelligerentMadness", fontAssetsFolder + "BelligerentMadness.ttf"));
+        fontAssetMap.add(new FontAsset("BlackJack", fontAssetsFolder + "BlackJack.otf"));
+        fontAssetMap.add(new FontAsset("Bough-Condensed", fontAssetsFolder + "Bough-Condensed.otf"));
+        fontAssetMap.add(new FontAsset("DancingScript-Bold", fontAssetsFolder + "DancingScript-Bold.ttf"));
+        fontAssetMap.add(new FontAsset("DeValencia-Regular", fontAssetsFolder + "DeValencia-Regular.otf"));
+        fontAssetMap.add(new FontAsset("Edo", fontAssetsFolder + "Edo.ttf"));
+        fontAssetMap.add(new FontAsset("EnglandHandDB", fontAssetsFolder + "EnglandHandDB.ttf"));
+        fontAssetMap.add(new FontAsset("EuphoriaScript-Regular", fontAssetsFolder + "EuphoriaScript-Regular.otf"));
+        fontAssetMap.add(new FontAsset("firsttest", fontAssetsFolder + "firsttest.ttf"));
+        fontAssetMap.add(new FontAsset("FrenteH1-Regular", fontAssetsFolder + "FrenteH1-Regular.otf"));
+        fontAssetMap.add(new FontAsset("GearedSlab-Extrabold", fontAssetsFolder + "GearedSlab-Extrabold.ttf"));
+        fontAssetMap.add(new FontAsset("Governor", fontAssetsFolder + "Governor.ttf"));
+        fontAssetMap.add(new FontAsset("Hominis", fontAssetsFolder + "Hominis.ttf"));
+        fontAssetMap.add(new FontAsset("HustleScript-Bold", fontAssetsFolder + "HustleScript-Bold.otf"));
+        fontAssetMap.add(new FontAsset("HVDRowdy", fontAssetsFolder + "HVDRowdy.otf"));
+        fontAssetMap.add(new FontAsset("ImpactLabel", fontAssetsFolder + "ImpactLabel.ttf"));
+        fontAssetMap.add(new FontAsset("KaushanScript-Regular", fontAssetsFolder + "KaushanScript-Regular.otf"));
+        fontAssetMap.add(new FontAsset("Langdon", fontAssetsFolder + "Langdon.otf"));
+        fontAssetMap.add(new FontAsset("LeagueScriptThin-Regular", fontAssetsFolder + "LeagueScriptThin-Regular.otf"));
+        fontAssetMap.add(new FontAsset("LeckerliOne", fontAssetsFolder + "LeckerliOne.otf"));
+        fontAssetMap.add(new FontAsset("Matchbook", fontAssetsFolder + "Matchbook.otf"));
+        fontAssetMap.add(new FontAsset("OceanBeach-MinorVintage", fontAssetsFolder + "OceanBeach-MinorVintage.otf"));
+        fontAssetMap.add(new FontAsset("OleoScript-Bold", fontAssetsFolder + "OleoScript-Bold.ttf"));
+        fontAssetMap.add(new FontAsset("Oswald-Bold", fontAssetsFolder + "Oswald-Bold.ttf"));
+        fontAssetMap.add(new FontAsset("PaeteRound", fontAssetsFolder + "PaeteRound.ttf"));
+        fontAssetMap.add(new FontAsset("PathwayGothicOne-Regular", fontAssetsFolder + "PathwayGothicOne-Regular.ttf"));
+        fontAssetMap.add(new FontAsset("PermanentMarker", fontAssetsFolder + "PermanentMarker.ttf"));
+        fontAssetMap.add(new FontAsset("Pincoyablack-Black", fontAssetsFolder + "Pincoyablack-Black.otf"));
+        fontAssetMap.add(new FontAsset("Playball-Regular", fontAssetsFolder + "Playball-Regular.ttf"));
+        fontAssetMap.add(new FontAsset("PorterSansBlock", fontAssetsFolder + "PorterSansBlock.otf"));
+        fontAssetMap.add(new FontAsset("Quatro", fontAssetsFolder + "Quatro.otf"));
+        fontAssetMap.add(new FontAsset("QuicksandDash-Regular", fontAssetsFolder + "QuicksandDash-Regular.otf"));
+        fontAssetMap.add(new FontAsset("Raleway-Light", fontAssetsFolder + "Raleway-Light.ttf"));
+        fontAssetMap.add(new FontAsset("Rancho", fontAssetsFolder + "Rancho.ttf"));
+        fontAssetMap.add(new FontAsset("RestlessYouthScript-Bold", fontAssetsFolder + "RestlessYouthScript-Bold.otf"));
+        fontAssetMap.add(new FontAsset("SixCaps", fontAssetsFolder + "SixCaps.ttf"));
+        fontAssetMap.add(new FontAsset("Slukoni-Medium", fontAssetsFolder + "Slukoni-Medium.otf"));
+        fontAssetMap.add(new FontAsset("SpecialElite-Regular", fontAssetsFolder + "SpecialElite-Regular.ttf"));
+        fontAssetMap.add(new FontAsset("STONEHARBOUR-Regular", fontAssetsFolder + "STONEHARBOUR-Regular.otf"));
+        fontAssetMap.add(new FontAsset("Sullivan-Bevel", fontAssetsFolder + "Sullivan-Bevel.otf"));
+        fontAssetMap.add(new FontAsset("TradeWinds", fontAssetsFolder + "TradeWinds.ttf"));
+        fontAssetMap.add(new FontAsset("TwilightScript", fontAssetsFolder + "TwilightScript.otf"));
+        fontAssetMap.add(new FontAsset("UbuntuTitling-Bold", fontAssetsFolder + "UbuntuTitling-Bold.ttf"));
+        fontAssetMap.add(new FontAsset("Yellowtail", fontAssetsFolder + "Yellowtail.otf"));
+        fontAssetMap.add(new FontAsset("BeginningYoga", fontAssetsFolder + "BeginningYoga.ttf"));
+        fontAssetMap.add(new FontAsset("YorkshireBrushScript-Regular", fontAssetsFolder + "YorkshireBrushScript-Regular.otf"));
+
+        DataSourceIdItemList<FontItem> fontsInUiList = new DataSourceIdItemList<>();
+        fontsInUiList.add(new FontItem("AvenirNext-Regular", "Avenir"));
+        fontsInUiList.add(new FontItem("AceofSpades-Regular", "Ace of Spades"));
+        fontsInUiList.add(new FontItem("Aerokids", "Aerokids"));
+        fontsInUiList.add(new FontItem("AlphaEcho", "Alpha Echo"));
+        fontsInUiList.add(new FontItem("Antonio-Bold", "Antonio"));
+        fontsInUiList.add(new FontItem("AnuDawItalic", "AnuDaw"));
+        fontsInUiList.add(new FontItem("ArbourOblique-Regular", "Arbour"));
+        fontsInUiList.add(new FontItem("Arcon-Rounded-Regular", "Arcon"));
+        fontsInUiList.add(new FontItem("Arizonia-Regular", "Arizonia"));
+        fontsInUiList.add(new FontItem("AvenirNext-DemiBold", "Avenir Demi"));
+        fontsInUiList.add(new FontItem("AvenirNext-Medium", "Avenir Med"));
+        fontsInUiList.add(new FontItem("AvenirNext-Bold", "Avenir Bold"));
+        fontsInUiList.add(new FontItem("AvenirNext-Italic", "Avenir Italic"));
+        fontsInUiList.add(new FontItem("Bebas", "Bebas"));
+        fontsInUiList.add(new FontItem("BelligerentMadness", "Belligerent"));
+        fontsInUiList.add(new FontItem("BlackJack", "Black Jack"));
+        fontsInUiList.add(new FontItem("Bough-Condensed", "Bough"));
+        fontsInUiList.add(new FontItem("DancingScript-Bold", "Dancing"));
+        fontsInUiList.add(new FontItem("DeValencia-Regular", "De Valencia"));
+        fontsInUiList.add(new FontItem("Edo", "Edo"));
+        fontsInUiList.add(new FontItem("EnglandHandDB", "England"));
+        fontsInUiList.add(new FontItem("EuphoriaScript-Regular", "Euphoria"));
+        fontsInUiList.add(new FontItem("firsttest", "First Test"));
+        fontsInUiList.add(new FontItem("FrenteH1-Regular", "Frente H1"));
+        fontsInUiList.add(new FontItem("GearedSlab-Extrabold", "Geared Slab"));
+        fontsInUiList.add(new FontItem("Governor", "Governor"));
+        fontsInUiList.add(new FontItem("Hominis", "Hominis"));
+        fontsInUiList.add(new FontItem("HustleScript-Bold", "Hustle"));
+        fontsInUiList.add(new FontItem("HVDRowdy", "HVD Rowdy"));
+        fontsInUiList.add(new FontItem("ImpactLabel", "Impact"));
+        fontsInUiList.add(new FontItem("KaushanScript-Regular", "Kaushan"));
+        fontsInUiList.add(new FontItem("Langdon", "Langdon"));
+        fontsInUiList.add(new FontItem("LeagueScriptThin-Regular", "League"));
+        fontsInUiList.add(new FontItem("LeckerliOne", "Lecker"));
+        fontsInUiList.add(new FontItem("Matchbook", "Matchbook"));
+        fontsInUiList.add(new FontItem("OceanBeach-MinorVintage", "Ocean Beach"));
+        fontsInUiList.add(new FontItem("OleoScript-Bold", "Oleo Script"));
+        fontsInUiList.add(new FontItem("Oswald-Bold", "Oswald"));
+        fontsInUiList.add(new FontItem("PaeteRound", "Paete"));
+        fontsInUiList.add(new FontItem("PathwayGothicOne-Regular", "Pathway"));
+        fontsInUiList.add(new FontItem("PermanentMarker", "Permanent"));
+        fontsInUiList.add(new FontItem("Pincoyablack-Black", "Pincoya"));
+        fontsInUiList.add(new FontItem("Playball-Regular", "Playball"));
+        fontsInUiList.add(new FontItem("PorterSansBlock", "Porter"));
+        fontsInUiList.add(new FontItem("Quatro", "Quatro"));
+        fontsInUiList.add(new FontItem("QuicksandDash-Regular", "Quicksand"));
+        fontsInUiList.add(new FontItem("Raleway-Light", "Raleway"));
+        fontsInUiList.add(new FontItem("Rancho", "Rancho"));
+        fontsInUiList.add(new FontItem("RestlessYouthScript-Bold", "Restless"));
+        fontsInUiList.add(new FontItem("SixCaps", "Six Caps"));
+        fontsInUiList.add(new FontItem("Slukoni-Medium", "Slukoni"));
+        fontsInUiList.add(new FontItem("SpecialElite-Regular", "Special Elite"));
+        fontsInUiList.add(new FontItem("STONEHARBOUR-Regular", "Stone"));
+        fontsInUiList.add(new FontItem("Sullivan-Bevel", "Sullivan"));
+        fontsInUiList.add(new FontItem("TradeWinds", "Trade Winds"));
+        fontsInUiList.add(new FontItem("TwilightScript", "Twilight"));
+        fontsInUiList.add(new FontItem("UbuntuTitling-Bold", "Ubuntu"));
+        fontsInUiList.add(new FontItem("Yellowtail", "Yellowtail"));
+        fontsInUiList.add(new FontItem("BeginningYoga", "Yoga"));
+        fontsInUiList.add(new FontItem("YorkshireBrushScript-Regular", "Yorkshire"));
+
+        UiConfigText uiConfigText = settingsList.getSettingsModel(UiConfigText.class);
+        uiConfigText.setFontList(fontsInUiList);
+
+
+
+        final String art="https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/newartwork/";
+        int total=15;
+        String[] badges=new String[total];
+        int i=14;
+        int position=0;
+        while (i <= 16)
+        {
+            badges[position]="frame_" + i;
+            position++;
+            i++;
+        }
+        i=19;
+        while (i <= 29)
+        {
+            badges[position]="frame_" + i;
+            position++;
+            i++;
+        }
+            badges[position]="frame_" + 31;
+
+
+        // Obtain the asset config from you settingsList
+        AssetConfig assetConfig = settingsList.getConfig();
+// Add Assets
+        ArrayList<ImageStickerItem> badgeItems = new ArrayList<ImageStickerItem>(total);
+        i=0;
+        while(i<total){
+        assetConfig.addAsset(
+              new ImageStickerAsset(
+                        badges[i],
+                        ImageSource.create(Uri.parse(art + badges[i]+ ".png"))
+                )
+        );
+            badgeItems.add(  new ImageStickerItem(badges[i], badges[i],
+                    ImageSource.create(Uri.parse(art + badges[i] + ".png"))));
+        i++;
+        }
+
+        total=21;
+        String[] borders=new String[total];
+        i=1;
+        position=0;
+        while (i <= 5)
+        {
+            borders[position]="frame_" + i;
+            position++;
+            i++;
+        }
+        i=8;
+        while (i <= 10)
+        {
+            borders[position]="frame_" + i;
+            position++;
+            i++;
+        }
+        i=17;
+        while (i <= 18)
+        {
+            borders[position]="frame_" + i;
+            position++;
+            i++;
+        }
+        i=32;
+        while (i <= 42)
+        {
+            borders[position]="frame_" + i;
+            position++;
+            i++;
+        }
+
+
+        ArrayList<ImageStickerItem> borderItems = new ArrayList<ImageStickerItem>(total);
+        i=0;
+        while(i<total){
+            assetConfig.addAsset(
+                    new ImageStickerAsset(
+                            borders[i],
+                            ImageSource.create(Uri.parse(art + borders[i]+ ".png"))
+                    )
+            );
+            borderItems.add(  new ImageStickerItem(borders[i], borders[i],
+                    ImageSource.create(Uri.parse(art + borders[i] + ".png"))));
+            i++;
+        }
+
+
+        total=30;
+        String[] swashes=new String[total];
+        i=6;
+        position=0;
+        while (i <= 7)
+        {
+            swashes[position]="frame_" + i;
+            position++;
+            i++;
+        }
+        i=43;
+        while (i <= 70)
+        {
+            swashes[position]="frame_" + i;
+            position++;
+            i++;
+        }
+
+        ArrayList<ImageStickerItem> swashItems = new ArrayList<ImageStickerItem>(total);
+        i=0;
+        while(i<total){
+            assetConfig.addAsset(
+                    new ImageStickerAsset(
+                            swashes[i],
+                            ImageSource.create(Uri.parse(art + swashes[i]+ ".png"))
+                    )
+            );
+            swashItems.add(  new ImageStickerItem(swashes[i], swashes[i],
+                    ImageSource.create(Uri.parse(art + swashes[i] + ".png"))));
+            i++;
+        }
+
+
+        total=73;
+        String[] words=new String[total];
+        i=11;
+        position=0;
+        while (i <= 13)
+        {
+            words[position]="frame_" + i;
+            position++;
+            i++;
+        }
+        i=1;
+        while (i <= 35)
+        {
+            words[position]="text_" + i;
+            position++;
+            i++;
+        }
+        i=151;
+        while (i <= 185)
+        {
+            words[position]="object_" + i;
+            position++;
+            i++;
+        }
+        i=32;
+
+        ArrayList<ImageStickerItem> wordItems = new ArrayList<ImageStickerItem>(total);
+        i=0;
+        while(i<total){
+            assetConfig.addAsset(
+                    new ImageStickerAsset(
+                            words[i],
+                            ImageSource.create(Uri.parse(art + words[i]+ ".png"))
+                    )
+            );
+            wordItems.add(  new ImageStickerItem(words[i], words[i],
+                    ImageSource.create(Uri.parse(art + words[i] + ".png"))));
+            i++;
+        }
+
+
+        total=150;
+        String[] objects=new String[total];
+        i=1;
+        position=0;
+        while (i <= 150)
+        {
+            objects[position]="object_" + i;
+            position++;
+            i++;
+        }
+        ArrayList<ImageStickerItem> objectItems = new ArrayList<ImageStickerItem>(total);
+        i=0;
+        while(i<total){
+            assetConfig.addAsset(
+                    new ImageStickerAsset(
+                            objects[i],
+                            ImageSource.create(Uri.parse(art + objects[i]+ ".png"))
+                    )
+            );
+            objectItems.add(  new ImageStickerItem(objects[i], objects[i],
+                    ImageSource.create(Uri.parse(art + objects[i] + ".png"))));
+            i++;
+        }
+
+
+
+
+        UiConfigSticker uiConfigSticker = settingsList.getSettingsModel(UiConfigSticker.class);
+        uiConfigSticker.setStickerLists(
+                StickerPackEmoticons.getStickerCategory(),
+                StickerPackShapes.getStickerCategory(),
+                new StickerCategoryItem(
+                        "badges",
+                        "Badges",
+                        ImageSource.create(Uri.parse(art + "categories/badges.png")),
+                        badgeItems
+                ),
+                new StickerCategoryItem(
+                        "borders",
+                        "Borders",
+                        ImageSource.create(Uri.parse(art + "categories/borders.png")),
+                        borderItems
+                ),
+                new StickerCategoryItem(
+                        "swashes",
+                        "Swashes",
+                        ImageSource.create(Uri.parse(art + "categories/swashes.png")),
+                        swashItems
+                ),
+                new StickerCategoryItem(
+                        "words",
+                        "Words",
+                        ImageSource.create(Uri.parse(art + "categories/words.png")),
+                        wordItems
+                ),
+                new StickerCategoryItem(
+                        "objects",
+                        "Objects",
+                        ImageSource.create(Uri.parse(art + "categories/outdoor.png")),
+                        objectItems
+                )
+
+        );
+
 
 
         return settingsList;
