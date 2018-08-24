@@ -373,7 +373,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
     [PESDK setBundleImageBlock:^UIImage * _Nullable(NSString * _Nonnull imageName) {
         if ([imageName isEqualToString:@"imgly_icon_save"]) {
-            return [UIImage imageNamed:@"check44"];
+            return [UIImage imageNamed:@"up24"];
         }
         return nil;
     }];
