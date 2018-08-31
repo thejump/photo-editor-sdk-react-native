@@ -56,7 +56,10 @@ import ly.img.android.pesdk.ui.panels.item.FontItem;
 import ly.img.android.pesdk.backend.model.config.ImageStickerAsset;
 import ly.img.android.pesdk.ui.panels.item.StickerCategoryItem;
 import ly.img.android.pesdk.ui.panels.item.ImageStickerItem;
+import ly.img.android.pesdk.backend.model.config.OverlayAsset;
+import ly.img.android.pesdk.backend.model.constant.BlendMode;
 import android.net.Uri;
+import ly.img.android.pesdk.ui.panels.item.OverlayItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -521,6 +524,101 @@ uiConfigMainMenu.setToolList(
 
         );
 
+
+
+
+
+      final String overlays="https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/photoeditor/";
+      assetConfig.addAsset(
+        new OverlayAsset(
+          "overlay_painting",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_painting.jpg")),
+          BlendMode.OVERLAY,
+          1f
+        ),
+        new OverlayAsset(
+          "overlay_grainy",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_grain.jpg")),
+          BlendMode.OVERLAY,
+          1f
+        ),
+        new OverlayAsset(
+          "overlay_rain",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_rain.jpg")),
+          BlendMode.OVERLAY,
+          1f
+        ),
+        new OverlayAsset(
+          "overlay_hearts",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_hearts.jpg")),
+          BlendMode.SCREEN,
+          1f
+        ),
+        new OverlayAsset(
+          "overlay_wall",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_wall2.jpg")),
+          BlendMode.OVERLAY,
+          1f
+        ),
+        new OverlayAsset(
+          "overlay_tj",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_tj4.jpg")),
+          BlendMode.OVERLAY,
+          1f
+        )
+        );
+
+
+      UiConfigOverlay uiConfigOverlay = settingsList.getSettingsModel(UiConfigOverlay.class);
+// Add Overlay items to the UI
+      uiConfigOverlay.setOverlayList(
+        new OverlayItem(
+          OverlayAsset.NONE_BACKDROP_ID,
+          R.string.pesdk_overlay_asset_none,
+          ImageSource.create(R.drawable.imgly_icon_option_overlay_none)
+        ),
+        new OverlayItem(
+          "imgly_overlay_vintage",
+          "Vintage",
+          ImageSource.create(R.drawable.imgly_overlay_vintage_thumb)
+        ),
+        new OverlayItem(
+          "overlay_painting",
+          "Painting",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_painting_thumb.jpg"))
+        ),
+        new OverlayItem(
+          "overlay_grainy",
+          "Grainy",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_grain_thumb.jpg"))
+        ),
+        new OverlayItem(
+          "overlay_rain",
+          "Rain",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_rain_thumb.jpg"))
+        ),
+        new OverlayItem(
+          "overlay_hearts",
+          "Hearts",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_hearts_thumb.jpg"))
+        ),
+        new OverlayItem(
+          "overlay_wall",
+          "Wall",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_wall2_thumb.jpg"))
+        ),
+      new OverlayItem(
+          "imgly_overlay_lightleak1",
+          "Lightleak",
+          ImageSource.create(R.drawable.imgly_overlay_lightleak1_thumb)
+        ),
+        new OverlayItem(
+          "overlay_tj",
+          "The Jump",
+          ImageSource.create(Uri.parse(overlays + "imgly_overlay_tj_thumb.jpg"))
+        )
+
+      );
 
 
         return settingsList;
