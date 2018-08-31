@@ -192,8 +192,55 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
         }
     }];
     
-   
     
+    NSString* overlayURL=@"https://d1hwjrzco5rhv1.cloudfront.net/imageAssets/photoeditor/";
+    
+    
+    NSMutableArray* overlays = [[NSMutableArray alloc] init];
+
+    //NSMutableArray<PESDKOverlay *> *overlays = [[PESDKOverlay alloc] mutableCopy];
+    [overlays addObject:PESDKOverlay.none];
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"imgly_overlay_vintage" displayName:@"Vintage"
+                                                              url:[[NSBundle pesdkBundle]  URLForResource:@"imgly_overlay_vintage" withExtension:@"jpg"]
+                                                     thumbnailURL:[[NSBundle pesdkBundle]  URLForResource:@"imgly_overlay_vintage_thumb" withExtension:@"jpg"]
+                                                 initialBlendMode:PESDKBlendModeDarken   ]];
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"Painting" displayName:@"Painting"
+                                                              url: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_painting.jpg"]]
+                                                     thumbnailURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_painting_thumb.jpg"]]
+                                                 initialBlendMode:PESDKBlendModeOverlay   ]];
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"Grainy" displayName:@"Grainy"
+                                                              url: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_grain.jpg"]]
+                                                     thumbnailURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_grain_thumb.jpg"]]
+                                                 initialBlendMode:PESDKBlendModeOverlay   ]];
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"imgly_overlay_rain" displayName:@"Rain"
+                                                              url:[[NSBundle pesdkBundle]  URLForResource:@"imgly_overlay_rain" withExtension:@"jpg"]
+                                                     thumbnailURL:[[NSBundle pesdkBundle]  URLForResource:@"imgly_overlay_rain_thumb" withExtension:@"jpg"]
+                                                 initialBlendMode:PESDKBlendModeOverlay   ]];
+    
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"Hearts" displayName:@"Hearts"
+                                                              url: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_hearts.jpg"]]
+                                                     thumbnailURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_hearts_thumb.jpg"]]
+                                                 initialBlendMode:PESDKBlendModeScreen   ]];
+     [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"Wall" displayName:@"Wall"
+                                                              url: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_wall2.jpg"]]
+                                                     thumbnailURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_wall2_thumb.jpg"]]
+                                                 initialBlendMode:PESDKBlendModeOverlay   ]];
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"imgly_overlay_lightleak1" displayName:@"Lightleak"
+                                                              url:[[NSBundle pesdkBundle]  URLForResource:@"imgly_overlay_lightleak1" withExtension:@"jpg"]
+                                                     thumbnailURL:[[NSBundle pesdkBundle]  URLForResource:@"imgly_overlay_lightleak1_thumbnail" withExtension:@"jpg"]
+                                                 initialBlendMode:PESDKBlendModeScreen   ]];
+    [overlays addObject:[[PESDKOverlay alloc]  initWithIdentifier:@"imgly_overlay_tj" displayName:@"The Jump"
+                                                              url: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_tj4.jpg"]]
+                                                     thumbnailURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", overlayURL, @"imgly_overlay_tj_thumb.jpg"]]   initialBlendMode:PESDKBlendModeOverlay   ]];
+
+    
+    PESDKOverlay.all =overlays;
+    
+    
+    
+    
+    
+ 
   
      NSMutableArray<PESDKStickerCategory *> *categories = [[PESDKStickerCategory all] mutableCopy];
     
