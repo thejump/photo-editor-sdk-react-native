@@ -488,7 +488,8 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
             if ([[options allKeys] containsObject: kShowFiltersInCameraKey]) {
                 b.showFilters = [[options valueForKey:kShowFiltersInCameraKey] boolValue];
             }
-
+            b.showCancelButton=true;
+            
             
             // TODO: Video recording not supported currently
             b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];//,[NSNumber numberWithInteger:RecordingModeVideo]];
@@ -544,9 +545,19 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
             [weakSelf saveVideo:_.absoluteString resolve:resolve];
         }*/
     }];
-    
+        [self.cameraController setCancelBlock:^{
+           [weakSelf myCancelCamera:resolve];
+        }];
+         
     [currentViewController presentViewController:self.cameraController animated:YES completion:nil];
       });
+}
+
+-(void)myCancelCamera: (RCTPromiseResolveBlock)resolve{
+    resolve(nil);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.cameraController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    });
 }
 
 -(void)saveVideo:(NSString *)path resolve: (RCTPromiseResolveBlock)resolve{
