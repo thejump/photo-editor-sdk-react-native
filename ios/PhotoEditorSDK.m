@@ -527,12 +527,12 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
     PESDKConfiguration* config = [self _buildConfig:options];
     
     self.cameraController = [[PESDKCameraViewController alloc] initWithConfiguration:config];
-    [self.cameraController.cameraController setupWithInitialRecordingMode:RecordingModePhoto error:nil];
+   // [self.cameraController.cameraController setupWithInitialRecordingMode:RecordingModePhoto error:nil];
     
-    UISwipeGestureRecognizer* swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(close)];
-    swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+  //  UISwipeGestureRecognizer* swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(close)];
+  //  swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     
-    [self.cameraController.view addGestureRecognizer:swipeDownRecognizer];
+   // [self.cameraController.view addGestureRecognizer:swipeDownRecognizer];
     [self.cameraController setCompletionBlock:^(UIImage * image, NSURL * _) {
        // if(image){
             [currentViewController dismissViewControllerAnimated:YES completion:^{
