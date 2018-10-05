@@ -59,7 +59,10 @@ import ly.img.android.pesdk.ui.panels.item.ImageStickerItem;
 import ly.img.android.pesdk.backend.model.config.OverlayAsset;
 import ly.img.android.pesdk.backend.model.constant.BlendMode;
 import android.net.Uri;
+
 import ly.img.android.pesdk.ui.panels.item.OverlayItem;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,7 +128,7 @@ public class PESDKModule extends ReactContextBaseJavaModule {
     }
 
     // Config builder
-    private SettingsList buildConfig(ReadableMap options, @Nullable ReadableArray features, @Nullable String imagePath,boolean forceCrop) {
+    private SettingsList buildConfig(ReadableMap options, @Nullable ReadableArray features, @Nullable String imagePath) {
         SettingsList settingsList = new SettingsList();
 
         settingsList.getSettingsModel(CameraSettings.class)
@@ -140,7 +143,7 @@ public class PESDKModule extends ReactContextBaseJavaModule {
 
 
         if(imagePath!=null){
-            settingsList.getSettingsModel(EditorLoadSettings.class).setImageSource(imagePath);
+            settingsList.getSettingsModel(EditorLoadSettings.class).setImageSource(Uri.fromFile(new File(imagePath)));
         }
 
                 // TODO: Config options in PESDK v5 are limited compared to iOS (or I didn't find them)
@@ -148,29 +151,47 @@ public class PESDKModule extends ReactContextBaseJavaModule {
 
 UiConfigMainMenu uiConfigMainMenu = settingsList.getSettingsModel(UiConfigMainMenu.class);
 // Set the tools you want keep sure you licence is cover the feature and do not forget to include the correct modules in your build.gradle
-uiConfigMainMenu.setToolList(
-  new ToolItem("imgly_tool_filter", R.string.pesdk_filter_title_name, ImageSource.create(R.drawable.imgly_icon_tool_filters)),
-  new ToolItem("imgly_tool_adjustment", R.string.pesdk_adjustments_title_name, ImageSource.create(R.drawable.imgly_icon_tool_adjust)),
-  new ToolItem("imgly_tool_sticker_selection", R.string.pesdk_sticker_title_name, ImageSource.create(R.drawable.imgly_icon_tool_sticker)),
-  new ToolItem("imgly_tool_text_design", R.string.pesdk_textDesign_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text_design)),
-  new ToolItem("imgly_tool_text", R.string.pesdk_text_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text)),
-  new ToolItem("imgly_tool_overlay", R.string.pesdk_overlay_title_name, ImageSource.create(R.drawable.imgly_icon_tool_overlay)),
-  new ToolItem("imgly_tool_frame", R.string.pesdk_frame_title_name, ImageSource.create(R.drawable.imgly_icon_tool_frame)),
-  new ToolItem("imgly_tool_brush", R.string.pesdk_brush_title_name, ImageSource.create(R.drawable.imgly_icon_tool_brush)),
-  new ToolItem("imgly_tool_focus", R.string.pesdk_focus_title_name, ImageSource.create(R.drawable.imgly_icon_tool_focus))
-);
+        //I want text design first if they are creating a jump cover
+        if(options.hasKey("androidTextFirst") && options.getBoolean("androidTextFirst")) {
+            uiConfigMainMenu.setToolList(
+                    new ToolItem("imgly_tool_text_design", R.string.pesdk_textDesign_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text_design)),
+                    new ToolItem("imgly_tool_filter", R.string.pesdk_filter_title_name, ImageSource.create(R.drawable.imgly_icon_tool_filters)),
+                    new ToolItem("imgly_tool_adjustment", R.string.pesdk_adjustments_title_name, ImageSource.create(R.drawable.imgly_icon_tool_adjust)),
+                    new ToolItem("imgly_tool_sticker_selection", R.string.pesdk_sticker_title_name, ImageSource.create(R.drawable.imgly_icon_tool_sticker)),
+                    new ToolItem("imgly_tool_text", R.string.pesdk_text_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text)),
+                    new ToolItem("imgly_tool_overlay", R.string.pesdk_overlay_title_name, ImageSource.create(R.drawable.imgly_icon_tool_overlay)),
+                    new ToolItem("imgly_tool_frame", R.string.pesdk_frame_title_name, ImageSource.create(R.drawable.imgly_icon_tool_frame)),
+                    new ToolItem("imgly_tool_brush", R.string.pesdk_brush_title_name, ImageSource.create(R.drawable.imgly_icon_tool_brush)),
+                    new ToolItem("imgly_tool_focus", R.string.pesdk_focus_title_name, ImageSource.create(R.drawable.imgly_icon_tool_focus))
+            );
+        }
+else{
+            uiConfigMainMenu.setToolList(
+                    new ToolItem("imgly_tool_filter", R.string.pesdk_filter_title_name, ImageSource.create(R.drawable.imgly_icon_tool_filters)),
+                    new ToolItem("imgly_tool_text_design", R.string.pesdk_textDesign_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text_design)),
+                    new ToolItem("imgly_tool_adjustment", R.string.pesdk_adjustments_title_name, ImageSource.create(R.drawable.imgly_icon_tool_adjust)),
+                    new ToolItem("imgly_tool_sticker_selection", R.string.pesdk_sticker_title_name, ImageSource.create(R.drawable.imgly_icon_tool_sticker)),
+                    new ToolItem("imgly_tool_text", R.string.pesdk_text_title_name, ImageSource.create(R.drawable.imgly_icon_tool_text)),
+                    new ToolItem("imgly_tool_overlay", R.string.pesdk_overlay_title_name, ImageSource.create(R.drawable.imgly_icon_tool_overlay)),
+                    new ToolItem("imgly_tool_frame", R.string.pesdk_frame_title_name, ImageSource.create(R.drawable.imgly_icon_tool_frame)),
+                    new ToolItem("imgly_tool_brush", R.string.pesdk_brush_title_name, ImageSource.create(R.drawable.imgly_icon_tool_brush)),
+                    new ToolItem("imgly_tool_focus", R.string.pesdk_focus_title_name, ImageSource.create(R.drawable.imgly_icon_tool_focus))
+            );
+        }
 
+
+if(options.hasKey("androidForceCrop") && options.getBoolean("androidForceCrop")) {
 // Remove default Assets and add your own aspects
-        settingsList.getSettingsModel(AssetConfig.class).getAssetMap(CropAspectAsset.class).clear()
-                .add(
-                new CropAspectAsset("Crop", 1536, 2730, false)
-        );
+    settingsList.getSettingsModel(AssetConfig.class).getAssetMap(CropAspectAsset.class).clear()
+            .add(
+                    new CropAspectAsset("Crop", 1536, 2730, false)
+            );
 
 // Add your own Asset to UI config and select the Force crop Mode.
-        settingsList.getSettingsModel(UiConfigAspect.class).setAspectList(
-                new CropAspectItem("Crop","Crop")
-        );
-
+    settingsList.getSettingsModel(UiConfigAspect.class).setAspectList(
+            new CropAspectItem("Crop", "Crop")
+    );
+}
 
         final String fontAssetsFolder = "fonts/";
 
@@ -655,13 +676,13 @@ uiConfigMainMenu.setToolList(
     }
 
     @ReactMethod
-    public void openEditor(@NonNull String image,boolean forceCrop, ReadableArray features, ReadableMap options, final Promise promise) {
+    public void openEditor(@NonNull String image, ReadableArray features, ReadableMap options, final Promise promise) {
         if (getCurrentActivity() == null) {
            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
         } else {
             mPESDKPromise = promise;
 
-            SettingsList settingsList = buildConfig(options, features, image.toString(),forceCrop);
+            SettingsList settingsList = buildConfig(options, features, image.toString());
 
             new PhotoEditorBuilder(getCurrentActivity())
                     .setSettingsList(settingsList)
@@ -670,13 +691,13 @@ uiConfigMainMenu.setToolList(
     }
 
     @ReactMethod
-    public void openCamera(ReadableArray features,boolean forceCrop, ReadableMap options, final Promise promise) {
+    public void openCamera(ReadableArray features, ReadableMap options, final Promise promise) {
         if (getCurrentActivity() == null) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
         } else {
             mPESDKPromise = promise;
 
-            SettingsList settingsList = buildConfig(options, features, null,forceCrop);
+            SettingsList settingsList = buildConfig(options, features, null);
 
             new CameraPreviewBuilder(getCurrentActivity())
                     .setSettingsList(settingsList)
