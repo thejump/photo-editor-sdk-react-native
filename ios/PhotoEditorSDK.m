@@ -46,8 +46,6 @@ typedef enum {
 @property (strong, nonatomic) PESDKPhotoEditToolController* toolController;
 
 
-
-
 @end
 
 
@@ -590,12 +588,8 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
 
 -(void)photoEditViewController:(PESDKPhotoEditViewController *)photoEditViewController didSaveImage:(UIImage *)image imageAsData:(NSData *)data {
     if ([data length]<=0) {
-          self.resolver(@"unchanged");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
-        });
+        data = UIImageJPEGRepresentation(image, 1.0);
     }
-    else {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                          NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -608,7 +602,6 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
     });
-    }
 }
 
 -(void)photoEditViewController:(PESDKPhotoEditViewController *)photoEditViewController didDismissToolController:(PESDKPhotoEditToolController * _Nonnull)toolController{
