@@ -125,7 +125,7 @@ public class PESDKModule extends ReactContextBaseJavaModule {
     }
 
     // Config builder
-    private SettingsList buildConfig(ReadableMap options, @Nullable ReadableArray features, @Nullable String imagePath) {
+    private SettingsList buildConfig(ReadableMap options, @Nullable ReadableArray features, @Nullable String imagePath,boolean forceCrop) {
         SettingsList settingsList = new SettingsList();
 
         settingsList.getSettingsModel(CameraSettings.class)
@@ -139,6 +139,9 @@ public class PESDKModule extends ReactContextBaseJavaModule {
                 .setSavePolicy(EditorSaveSettings.SavePolicy.RETURN_ALWAYS_ONLY_OUTPUT);
 
 
+        if(imagePath!=null){
+            settingsList.getSettingsModel(EditorLoadSettings.class).setImageSource(imagePath);
+        }
 
                 // TODO: Config options in PESDK v5 are limited compared to iOS (or I didn't find them)
 
@@ -652,13 +655,13 @@ uiConfigMainMenu.setToolList(
     }
 
     @ReactMethod
-    public void openEditor(@NonNull String image, ReadableArray features, ReadableMap options, final Promise promise) {
+    public void openEditor(@NonNull String image,boolean forceCrop, ReadableArray features, ReadableMap options, final Promise promise) {
         if (getCurrentActivity() == null) {
            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
         } else {
             mPESDKPromise = promise;
 
-            SettingsList settingsList = buildConfig(options, features, image.toString());
+            SettingsList settingsList = buildConfig(options, features, image.toString(),forceCrop);
 
             new PhotoEditorBuilder(getCurrentActivity())
                     .setSettingsList(settingsList)
@@ -667,13 +670,13 @@ uiConfigMainMenu.setToolList(
     }
 
     @ReactMethod
-    public void openCamera(ReadableArray features, ReadableMap options, final Promise promise) {
+    public void openCamera(ReadableArray features,boolean forceCrop, ReadableMap options, final Promise promise) {
         if (getCurrentActivity() == null) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
         } else {
             mPESDKPromise = promise;
 
-            SettingsList settingsList = buildConfig(options, features, null);
+            SettingsList settingsList = buildConfig(options, features, null,forceCrop);
 
             new CameraPreviewBuilder(getCurrentActivity())
                     .setSettingsList(settingsList)
