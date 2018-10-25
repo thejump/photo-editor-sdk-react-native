@@ -426,7 +426,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
     self.editController = [[PESDKPhotoEditViewController alloc] initWithPhoto:image configuration:config menuItems:menuItems photoEditModel:photoEditModel];
     
-   // self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
+    self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
     
     
     self.editController.delegate = self;
