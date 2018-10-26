@@ -493,13 +493,14 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
             b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];//,[NSNumber numberWithInteger:RecordingModeVideo]];
         }];
 
-        [builder configureTransformToolController:^(PESDKTransformToolControllerOptionsBuilder * _Nonnull options) {
+        if ([options valueForKey:kForceCrop]) {
+             [builder configureTransformToolController:^(PESDKTransformToolControllerOptionsBuilder * _Nonnull options) {
             options.allowFreeCrop = NO;
             options.allowedCropRatios = @[
-                                          [[PESDKCropAspect alloc] initWithWidth:1536 height:2730 localizedName:@"Crop" rotatable:NO]
+                                          [[PESDKCropAspect alloc] initWithWidth:1080 height:1920 localizedName:@"Crop" rotatable:NO]
                                             ];
         }];
-
+        }
         
     }];
     
@@ -598,7 +599,13 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
                       [randomPath stringByAppendingString:@".jpg"] ];
     
     [data writeToFile:path atomically:YES];
-     self.resolver(path);
+    
+    
+    NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+    response[@"path"] = path;
+    response[@"width"] = @(image.size.width);
+    response[@"height"] = @(image.size.height);
+     self.resolver(response);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.editController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
     });
