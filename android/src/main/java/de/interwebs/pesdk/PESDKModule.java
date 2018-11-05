@@ -59,15 +59,20 @@ import ly.img.android.pesdk.ui.panels.item.ImageStickerItem;
 import ly.img.android.pesdk.backend.model.config.OverlayAsset;
 import ly.img.android.pesdk.backend.model.constant.BlendMode;
 import android.net.Uri;
+import android.graphics.BitmapFactory;
+import com.facebook.react.bridge.*;
+
 
 import ly.img.android.pesdk.ui.panels.item.OverlayItem;
+import android.provider.MediaStore;
 
 import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import android.provider.MediaStore.MediaColumns;
+import android.database.Cursor;
 
 public class PESDKModule extends ReactContextBaseJavaModule {
 
@@ -111,7 +116,19 @@ public class PESDKModule extends ReactContextBaseJavaModule {
                             break;
                         case Activity.RESULT_OK:
                             String resultPath = data.getStringExtra(ImgLyIntent.RESULT_IMAGE_PATH);
-                            mPESDKPromise.resolve(resultPath);
+
+                            BitmapFactory.Options o = new BitmapFactory.Options();
+                            o.inJustDecodeBounds = true;
+                            BitmapFactory.decodeFile(resultPath, o);
+                            int imageHeight = o.outHeight;
+                            int imageWidth = o.outWidth;
+                            WritableMap result = Arguments.createMap();
+                            result.putString("path",resultPath);
+
+                            result.putInt("width", imageWidth);
+                            result.putInt("height", imageHeight);
+
+                            mPESDKPromise.resolve(result);
                             break;
                     }
                     mPESDKPromise = null;
