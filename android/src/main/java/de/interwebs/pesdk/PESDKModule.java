@@ -165,6 +165,13 @@ public class PESDKModule extends ReactContextBaseJavaModule {
 
                 // TODO: Config options in PESDK v5 are limited compared to iOS (or I didn't find them)
 
+        settingsList.getSettingsModel(UiConfigFilter.class).setFilterList(
+                FilterPackBasic.getFilterPack()
+        );
+        settingsList.getSettingsModel(UiConfigFrame.class).setFrameList(
+                FramePackBasic.getFramePack()
+        );
+
 
 UiConfigMainMenu uiConfigMainMenu = settingsList.getSettingsModel(UiConfigMainMenu.class);
 // Set the tools you want keep sure you licence is cover the feature and do not forget to include the correct modules in your build.gradle
