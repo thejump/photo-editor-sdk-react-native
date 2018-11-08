@@ -17,6 +17,7 @@ NSString* const kBackgroundColorCameraKey = @"backgroundColorCamera";
 NSString* const kCameraRollAllowedKey = @"cameraRowAllowed";
 NSString* const kShowFiltersInCameraKey = @"showFiltersInCamera";
 NSString* const kForceCrop = @"forceCrop";
+NSString* const kSingleCrop = @"singleCrop";
 NSString* const kEditorCaption = @"editorCaption";
 NSInteger*loaded=0;
 
@@ -80,7 +81,8 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
              @"cameraRollAllowedKey":           kCameraRollAllowedKey,
              @"showFiltersInCameraKey":         kShowFiltersInCameraKey,
              @"forceCrop":                      kForceCrop,
-        @"editorCaption":                      kEditorCaption,
+             @"singleCrop":                      kSingleCrop,
+             @"editorCaption":                      kEditorCaption,
              @"transformTool":                  [NSNumber numberWithInt: transformTool],
              @"filterTool":                     [NSNumber numberWithInt: filterTool],
              @"focusTool":                      [NSNumber numberWithInt: focusTool],
@@ -458,7 +460,6 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
             
             if ([options valueForKey:kForceCrop]) {
                 b.forceCropMode = [[options valueForKey:kForceCrop] boolValue];
-
             }
         
         
@@ -493,7 +494,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
             b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];//,[NSNumber numberWithInteger:RecordingModeVideo]];
         }];
 
-        if ([options valueForKey:kForceCrop]) {
+        if ([options valueForKey:kForceCrop] || [options valueForKey:kSingleCrop]) {
              [builder configureTransformToolController:^(PESDKTransformToolControllerOptionsBuilder * _Nonnull options) {
             options.allowFreeCrop = NO;
             options.allowedCropRatios = @[
