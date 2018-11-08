@@ -206,7 +206,7 @@ else{
         }
 
 
-if(options.hasKey("androidForceCrop") && options.getBoolean("androidForceCrop")) {
+if((options.hasKey("androidForceCrop") && options.getBoolean("androidForceCrop")) || (options.hasKey("androidSingleCrop") && options.getBoolean("androidSingleCrop"))) {
 // Remove default Assets and add your own aspects
     settingsList.getSettingsModel(AssetConfig.class).getAssetMap(CropAspectAsset.class).clear()
             .add(
