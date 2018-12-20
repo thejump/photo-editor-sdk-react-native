@@ -213,10 +213,19 @@ if((options.hasKey("androidForceCrop") && options.getBoolean("androidForceCrop")
                     new CropAspectAsset("Crop", 1536, 2730, false)
             );
 
-// Add your own Asset to UI config and select the Force crop Mode.
+  if((options.hasKey("androidForceCrop") && options.getBoolean("androidForceCrop"))) {
     settingsList.getSettingsModel(UiConfigAspect.class).setAspectList(
-            new CropAspectItem("Crop", "Crop")
+      new CropAspectItem("Crop", "Crop")
     );
+  }
+   else{
+    settingsList.getSettingsModel(UiConfigAspect.class).setAspectList(
+      new CropAspectItem("Crop", "Crop")
+    ).setForceCropMode(
+      // This prevents that the Transform tool opens at start.
+      UiConfigAspect.ForceCrop.SHOW_TOOL_NEVER
+    );
+  }
 }
 
         final String fontAssetsFolder = "fonts/";
