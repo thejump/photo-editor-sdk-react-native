@@ -424,8 +424,9 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
         }
         return nil;
     }];
-    PESDKPhoto *photo = [[PESDKPhoto alloc] initWithImage:image];
-   self.editController = [[PESDKPhotoEditViewController alloc] initWithPhotoAsset:photo configuration:config menuItems:menuItems photoEditModel:photoEditModel];
+    
+    
+    self.editController = [[PESDKPhotoEditViewController alloc] initWithPhoto:image configuration:config menuItems:menuItems photoEditModel:photoEditModel];
     
     self.editController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
     
@@ -490,7 +491,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
             
             
             // TODO: Video recording not supported currently
-          //  b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];//,[NSNumber numberWithInteger:RecordingModeVideo]];
+            b.allowedRecordingModesAsNSNumbers = @[[NSNumber numberWithInteger:RecordingModePhoto]];//,[NSNumber numberWithInteger:RecordingModeVideo]];
         }];
 
         if ([options valueForKey:kForceCrop] || [options valueForKey:kSingleCrop]) {
