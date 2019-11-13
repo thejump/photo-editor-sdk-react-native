@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-     classpath 'ly.img.android.pesdk:plugin:6.6.3'
+     classpath 'ly.img.android.pesdk:plugin:6.6.2'
    
         // Update you gradle version at least to v3.1.3
         classpath 'com.android.tools.build:gradle:3.1.3'
@@ -52,7 +52,7 @@ pesdkConfig {
     licencePath "LICENSE" // Name of the Licence file in the asset folder
 
     // Insert the latest SDK version here. You will find it here https://github.com/imgly/pesdk-android-demo/releases
-    pesdkVersion "6.6.3"
+    pesdkVersion "6.6.2"
 
     // If you use another supportLibVersion ('com.android.support'), change this version here to update your own supportLibVersion
     supportLibVersion "27.1.1"
