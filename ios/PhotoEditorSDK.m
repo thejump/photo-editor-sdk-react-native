@@ -436,7 +436,7 @@ static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
     
     dispatch_async(dispatch_get_main_queue(), ^{
         PESDKPhotoEditViewController *photoEditViewController = [[PESDKPhotoEditViewController alloc] initWithPhotoAsset:[[PESDKPhoto alloc] initWithData:[NSData dataWithContentsOfFile:path]] configuration:config menuItems:menuItems photoEditModel:[[PESDKPhotoEditModel alloc] init]];
-        photoEditViewController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
+        photoEditViewController.toolbar.backgroundColor=[UIColor colorWithRed: 0.11 green: 0.56 blue: 0.98 alpha:1.0];
         
         photoEditViewController.delegate = self;
         
@@ -614,7 +614,7 @@ RCT_EXPORT_METHOD(openCamera: (NSArray*) features options:(NSDictionary*) option
 
 -(void)photoEditViewController:(PESDKPhotoEditViewController *)photoEditViewController didDismissToolController:(PESDKPhotoEditToolController * _Nonnull)toolController{
   
-    photoEditViewController.toolbar.backgroundColor=[UIColor colorWithRed:0.16 green:0.69 blue:0.75 alpha:1.0];
+    photoEditViewController.toolbar.backgroundColor=[UIColor colorWithRed: 0.11 green: 0.56 blue: 0.98 alpha:1.0];
     
 }
 
